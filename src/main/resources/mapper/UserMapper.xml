@@ -282,4 +282,22 @@
       visited_num = #{visitedNum,jdbcType=INTEGER}
     where user_id = #{userId,jdbcType=VARCHAR}
   </update>
+
+
+
+  <select id="selectAllUser" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from user
+    <where>
+        <if test="nickName != ''">
+            user_nickname like CONCAT('%', #{nickName}, '%')
+        </if>
+        <if test="startDate != null">
+            <![CDATA[ AND DATE_FORMAT(#{startDate},'%Y-%m-%d') <= DATE_FORMAT(birthday,'%Y-%m-%d') ]]>
+        </if>
+        <if test="endDate != null">
+            <![CDATA[ AND DATE_FORMAT(#{endDate},'%Y-%m-%d') >= DATE_FORMAT(birthday,'%Y-%m-%d') ]]>
+        </if>
+    </where>
+
+  </select>
 </mapper>

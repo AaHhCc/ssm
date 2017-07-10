@@ -35,6 +35,16 @@
         <property name="suffix" value=".jsp" />
     </bean>
 
+    <!-- json数据传输
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean
+					class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
+			</list>
+		</property>
+	</bean>
+     -->
 
     <!-- **************************** Service、Dao相关 **************************** -->
 
@@ -73,10 +83,17 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <!-- 注入dataSource -->
         <property name="dataSource" ref="dataSource" />
-        <!-- 配置mybatis 可以不用了
+        <!-- 配置mybatis 可以不用了  -->
         <property name="configLocation" value="classpath:SqlMapConfig.xml"></property>
-         -->
-        <!-- 扫描mapper.xml配置文件 -->
+
+        <!-- 配置分页插件 -->
+        <property name="plugins">
+            <list>
+                <bean class="com.github.pagehelper.PageHelper">
+                </bean>
+            </list>
+        </property>
+
         <property name="mapperLocations" value="classpath:mapper/*Mapper.xml"></property>
     </bean>
 
@@ -89,12 +106,9 @@
     <!-- 声明事务 -->
     <tx:advice transaction-manager="transactionManager" id="tx">
         <tx:attributes>
-            <tx:method name="save*" read-only="false"/>
+            <tx:method name="insert*" read-only="false"/>
             <tx:method name="update*" read-only="false"/>
             <tx:method name="delete*" read-only="false"/>
-            <!--
-                除了save开头的方法以外，其他的方法用只读事务
-             -->
             <tx:method name="*" read-only="true"/>
         </tx:attributes>
     </tx:advice>
