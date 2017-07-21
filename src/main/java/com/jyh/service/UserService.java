@@ -21,12 +21,4 @@ public interface UserService {
      * @return 用户对象
      */
     User findUserById(String userId);
-
-    /**
-     * 通过条件批量筛选用户
-     *
-     * @param params 参数集合
-     * @return 分页的用户列表
-     */
-    PageInfo selectAllUser(Map<String, String> params);
 }

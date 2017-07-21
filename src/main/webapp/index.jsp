@@ -21,17 +21,11 @@
         <link rel="stylesheet" type="text/css" href="styles.css">
         -->
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/json.js"></script>
 </head>
 <script type="text/javascript">
 
 </script>
 <body>
-This is my JSP page.
-<br>
 
-<a id="json" href="">提交json数据,返回json数据</a><br/>
-<a id="form" href="">提交表单数据,返回json数据</a><br/>
-<br />
 </body>
 </html>
